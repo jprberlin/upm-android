@@ -124,4 +124,5 @@
     <string name="sync_settings">Sync Settings</string>
     <string name="problem_uploading">Problem Uploading Database</string>
     <string name="no_database_files">No Database files on Dropbox</string>
+    <string name="copied_text_to_clipboard">Copied text to clipboard</string>
 </resources>

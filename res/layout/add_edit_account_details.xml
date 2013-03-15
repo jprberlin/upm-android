@@ -8,6 +8,9 @@
         android:layout_width="fill_parent"
         android:layout_height="1px"
         android:layout_weight="1"
+        android:paddingTop="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
         android:fillViewport="true">
 
         <LinearLayout android:layout_width="fill_parent"
@@ -34,9 +37,10 @@
                   android:singleLine="true"
                   android:layout_marginBottom="10dip"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/password"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password" />
 
         <EditText android:id="@+id/account_password" 
                   android:layout_width="fill_parent" 

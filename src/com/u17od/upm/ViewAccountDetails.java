@@ -20,20 +20,24 @@
  */
 package com.u17od.upm;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager.LayoutParams;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.u17od.upm.database.AccountInformation;
 import com.u17od.upm.database.PasswordDatabase;
 
@@ -164,14 +168,54 @@ public class ViewAccountDetails extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     } 
+    
+    @SuppressLint("NewApi") @SuppressWarnings("deprecation")
+	public void clickHandler( View view ) {
+    	String copytext = "";
+    	switch ( view.getId()) {
+		case  R.id.account_name_wrapper:
+			TextView textview = (TextView) findViewById(R.id.account_name);
+			copytext = textview.getText().toString();
+			break;
+		case  R.id.account_userid_wrapper:
+			TextView textview2 = (TextView) findViewById(R.id.account_userid);
+			copytext = textview2.getText().toString();
+			break;
+		case  R.id.account_password_wrapper:
+			TextView textview3 = (TextView) findViewById(R.id.account_password);
+			copytext = textview3.getText().toString();
+		case  R.id.account_url_wrapper:
+			TextView textview4 = (TextView) findViewById(R.id.account_url);
+			copytext = textview4.getText().toString();
+		case  R.id.account_notes_wrapper:
+			TextView textview5 = (TextView) findViewById(R.id.account_notes);
+			copytext = textview5.getText().toString();
+			break;
+		default:
+			return;
+		}
+    	int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            clipboard.setText(copytext);
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE); 
+            android.content.ClipData clip = android.content.ClipData.newPlainText("UPM",copytext);
+            clipboard.setPrimaryClip(clip);
+        }
+        Toast toast = Toast.makeText(ViewAccountDetails.this, R.string.copied_text_to_clipboard, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.show();
 
+    }
+    
     private void populateView() {
         TextView accountNameTextView = (TextView) findViewById(R.id.account_name);
         accountNameTextView.setText(account.getAccountName());
 
         TextView accountUseridTextView = (TextView) findViewById(R.id.account_userid);
         accountUseridTextView.setText(new String(account.getUserId()));
-
+        
         TextView accountPasswordTextView = (TextView) findViewById(R.id.account_password);
         accountPasswordTextView.setText(new String(account.getPassword()));
 
@@ -180,6 +224,8 @@ public class ViewAccountDetails extends Activity {
 
         TextView accountNotesTextView = (TextView) findViewById(R.id.account_notes);
         accountNotesTextView.setText(new String(account.getNotes()));
+        
+        
     }
 
     private PasswordDatabase getPasswordDatabase() {
