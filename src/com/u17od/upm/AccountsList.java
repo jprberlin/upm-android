@@ -55,6 +55,9 @@ public class AccountsList extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
+        case R.id.view_account:
+            viewAccount(getAccount(info.targetView));
+            return true;
         case R.id.edit_account:
             editAccount(getAccount(info.targetView));
             return true;

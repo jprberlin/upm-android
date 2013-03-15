@@ -30,6 +30,7 @@
     <string name="delete">Löschen</string>
     <string name="add_account">Konto hinzufügen</string>
     <string name="edit_account">Konto bearbeiten</string>
+    <string name="view_account">Konto anzeigen</string>
     <string name="account_already_exists_error">Ein Konto mit deisem Namen existiert bereits</string>
     <string name="account_name_required_error">Kontoname wird benötigt</string>
     <string name="existing_master_password">Bestehendes Hauptpasswort</string>
